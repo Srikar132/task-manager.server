@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: task-manager-api
+    env: node
+    plan: free # or starter for paid plan
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        fromService: 
+          type: database
+          name: task-manager-mongodb
+          property: connectionString
+      # Add other environment variables in Render dashboard
+    numInstances: 1
+    
+  # Optional: If you want to deploy MongoDB on Render (not recommended for production)
+  # - type: database
+  #   name: task-manager-mongodb
+  #   plan: free
+  #   engine: mongodb
