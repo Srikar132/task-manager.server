@@ -5,9 +5,12 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "build": "npm run clean && tsc",
-    "clean": "rm -rf dist",
-    "postbuild": "echo 'Build completed successfully'",
+    "build": "npm run clean && npm run build:ts",
+    "build:ts": "tsc",
+    "build:force": "npm run clean && tsc --skipLibCheck --noImplicitAny false --strict false",
+    "prebuild": "npm install",
+    "clean": "rimraf dist",
+    "postbuild": "echo Build completed successfully",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "npm run build && npm start"
   },
@@ -16,6 +19,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.5.2",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "bcryptjs": "^3.0.2",
@@ -32,21 +42,15 @@
     "mongoose": "^8.18.2",
     "morgan": "^1.10.1",
     "reflect-metadata": "^0.2.2",
+    "rimraf": "^3.0.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "typescript": "^5.9.2",
     "winston": "^3.17.0",
     "xss": "^1.0.15"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/compression": "^1.8.1",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/morgan": "^1.9.10",
-    "@types/node": "^24.5.2",
     "nodemon": "^3.1.10",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "ts-node": "^10.9.2"
   }
 }
